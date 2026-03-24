@@ -17,18 +17,14 @@
 			space: false, 
 			customcheck: false, 
 			customchar: '', 
-			charset: '', 
-			password: '',
 			type: 'length',
-			wholelen: 0,
 			len: 10,
 			entropy: 124,
-			entropystr: 0,
 			refresh: 0
 			}" data-computed:charset="initCharSet($numbers, $uppercase, $lowercase, $ascii, $space, $customcheck, $customchar)"
 		data-computed:wholelen="calcLength($type, $len, $entropy, $charset)"
-		data-computed:entropystr="calcentropy($charset, $wholelen)" ;
-		data-effect="$password = ($charset && $wholelen > 0 && $wholelen <= 10000) ? generatePassword($charset, $wholelen, $refresh) : '';">
+		data-computed:entropystr="calcEntropy($charset, $wholelen)"
+		data-effect="$password = ($charset && $wholelen > 0 && $wholelen <= 10000) ? generatePassword($charset, $wholelen, $refresh) : ''">
 		<h1>Random password generator (Datastar + JS)</h1>
 		<fieldset data-attr:disabled="$customcheck">
 			<legend>Character-set</legend>
@@ -48,25 +44,25 @@
 			<label>
 				<input type="checkbox" data-bind:customcheck />
 				Custom: <input type="text" data-bind:customchar data-on:input="$customcheck=true" />
-			</label></br>
-			<span data-show="$type==='entropy' && $charset.length==1">
+			</label><br />
+			<span data-show="$type==='entropy' && $charset.length==1" style="display:none;">
 				Error: Need atleast 2 distinct characters in set
 			</span>
 		</fieldset>
 		<fieldset>
 			<legend>Password-strength</legend>
 			<label>
-				<input type="radio" value="length" data-bind:type /> Length:
+				<input type="radio" name="type" value="length" data-bind:type /> Length:
 				<input type="number" data-on:input="$type='length'" data-bind:len /> characters
 			</label><br />
 			<label>
-				<input type="radio" value="entropy" data-bind:type /> Entropy:
+				<input type="radio" name="type" value="entropy" data-bind:type /> Entropy:
 				<input type="number" data-on:input="$type='entropy'" data-bind:entropy /> bits
 			</label><br />
-			<span data-show="$wholelen > 10000 && !($type==='entropy' && $charset.length==1)">
+			<span data-show="$wholelen > 10000 && !($type==='entropy' && $charset.length==1)" style="display:none;">
 				Error: Password length too large
 			</span>
-			<span data-show="$wholelen < 0">
+			<span data-show="$wholelen < 0" style="display:none;">
 				Error: Negative password length
 			</span><br />
 		</fieldset>
@@ -80,7 +76,7 @@
 			<button type="button" data-on:click="copy()" data-attr:disabled="$password == ''"
 					data-class:enabled="$password != ''" title="Copy">Copy</button>
 
-			<p id="strength" data-show="$password != ''">
+			<p id="strength" data-show="$password != ''" style="display:none;">
 				Length: <output data-text="$wholelen"></output> chars,
 				Charset size: <output data-text="$charset.length"></output> symbols,
 				Entropy: <output data-text="$entropystr"></output> bits

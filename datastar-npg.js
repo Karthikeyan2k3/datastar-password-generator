@@ -28,18 +28,20 @@ function initCharSet(numbers, uppercase, lowercase, ascii, space, customcheck, c
     }
 
     // Removes duplicate entries
-    let orgCharset = "";
-    for (const ch of rawCharset) {
-        const cc = ch.codePointAt(0);
-        if (cc >= 0xD800 ? 0xE000 > cc : false) {
-            throw new RangeError("Invalid UTF-16 string");
-        }
-        if (!orgCharset.includes(ch)) {
-            orgCharset += ch;
-        }
+const seen = new Set();
+let charset = "";
+for (const ch of rawCharset) {
+    const cc = ch.codePointAt(0);
+    if (cc >= 0xD800 && cc < 0xE000) {
+        continue;
     }
-    console.log(orgCharset);
-    return orgCharset;
+    if (!seen.has(ch)) {
+        seen.add(ch);
+        charset += ch;
+    }
+}
+
+return charset;
 }
 
 function initCrypto() {
@@ -58,35 +60,28 @@ function initCrypto() {
 
 //  Calculate length 
 function calcLength(type, len, entropy, charset) {
-    let wholelen;
-    if (type === 'length') {
-        wholelen = parseInt(len);
-    } else if (type === 'entropy') {
-        wholelen = Math.ceil(parseFloat(entropy) * Math.log(2) / Math.log(charset.length));
-    } else {
-        throw new Error("Assertion error");
+    if (type === "length") {
+        return parseInt(len, 10);
     }
-    console.log(wholelen);
-    return wholelen;
+    if (type === "entropy") {
+        if (!charset || charset.length < 2) {
+            return 0;
+        }
+        return Math.ceil(parseFloat(entropy) * Math.log(2) / Math.log(charset.length));
+    }
+    throw new Error("Assertion error: unknown type");
 }
 
 // Calculate entropy for display 
-function calcentropy(charset, wholelen) {
-    if (charset.length === 0 || wholelen <= 0)
-        return "0";
-
+function calcEntropy(charset, wholelen) {
+    if (!charset || charset.length === 0 || wholelen <= 0) return "0";
     const entropy = Math.log(charset.length) * wholelen / Math.log(2);
-    let entropystr;
-    if (70 > entropy) {
-        entropystr = entropy.toFixed(2);
-    } else if (200 > entropy) {
-        entropystr = entropy.toFixed(1);
-    } else {
-        entropystr = entropy.toFixed(0);
-    }
-    return entropystr;
+    if (!isFinite(entropy) || isNaN(entropy)) return "0";
+    if (entropy < 70) return entropy.toFixed(2);
+    if (entropy < 200) return entropy.toFixed(1);
+    return entropy.toFixed(0);
 }
-
+    
 function generatePassword(charset, wholelen, _refresh) {
     if (wholelen < 0 || wholelen > 10000) {
         return "";
@@ -111,7 +106,7 @@ function randomInt(n) {
 
 // Not secure or high quality, but always available.
 function randomIntMathRandom(n) {
-    let x = Math.floor(Math.random() * n);
+    const x = Math.floor(Math.random() * n);
     if (0 > x || x >= n)
         throw new Error("Arithmetic exception");
     return x;
@@ -122,7 +117,7 @@ function randomIntBrowserCrypto(n) {
     if (cryptoObject === null)
         return 0;
     // Generate an unbiased sample
-    let x = new Uint32Array(1);
+    const x = new Uint32Array(1);
     do cryptoObject.getRandomValues(x);
     while (x[0] - x[0] % n > 4294967296 - n);
     return x[0] % n;
