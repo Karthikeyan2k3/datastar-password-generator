@@ -53,9 +53,9 @@ form input[type=number] {
 fieldset {
     margin-top: 20px;
     margin-bottom: 20px;
-    max-width:unset;
-    line-height:1.35; 
-    word-break:break-all;
+    max-width: unset;
+    line-height: 1.35;
+    word-break: break-all;
 }
 
 #password {
@@ -69,16 +69,24 @@ fieldset {
     user-select: all;
 }
 
-#strength{
+#strength {
     font-style: italic;
     color: #928f8f;
 }
 
-span{
+span {
     color: red;
-    font-size:large;
+    font-size: large;
 }
 
-label{
+label {
     user-select: none;
+}
+
+.alert {
+    background-color: #F8F8F8;
+    font-size: 15px;
+    color: black;
+    border-radius: 20px;
+    padding: 5px;
 }

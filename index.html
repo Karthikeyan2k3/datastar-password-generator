@@ -20,7 +20,8 @@
 			type: 'length',
 			len: 10,
 			entropy: 124,
-			refresh: 0
+			refresh: 0,
+			copied: false
 			}" data-computed:charset="initCharSet($numbers, $uppercase, $lowercase, $ascii, $space, $customcheck, $customchar)"
 		data-computed:wholelen="calcLength($type, $len, $entropy, $charset)"
 		data-computed:entropystr="calcEntropy($charset, $wholelen)"
@@ -73,8 +74,11 @@
 			<button type="button" data-on:click="$refresh++" data-attr:disabled="$password === ''"
 				title="Re-generate">&#x21bb;</button>
 
-			<button type="button" data-on:click="copy()" data-attr:disabled="$password == ''"
-				data-class:enabled="$password != ''" title="Copy">Copy</button>
+			<button type="button"
+				data-on:click="navigator.clipboard.writeText(document.getElementById('password').textContent); $copied = true"
+				data-on:click__delay.2s="$copied = false" data-attr:disabled="$password == ''"
+				title="Copy">Copy</button>
+			<span class="alert" data-show="$copied" style="display:none;">Copied!</span>
 
 			<p id="strength" data-show="$password != ''" style="display:none;">
 				Length: <output data-text="$wholelen"></output> chars,

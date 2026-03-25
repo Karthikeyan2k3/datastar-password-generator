@@ -92,11 +92,6 @@ function generatePassword(charset, wholelen, _refresh) {
     return result;
 }
 
-function copy() {
-    const text = document.getElementById("password").textContent;
-    return navigator.clipboard.writeText(text);
-}
-
 // Returns a random integer in the range [0, n) using a variety of methods.
 function randomInt(n) {
     let x = randomIntMathRandom(n);
