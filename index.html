@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="style.css">
 	<title>Random password generator (Datastar + JS)</title>
 	<script type="module"
-		src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.7/bundles/datastar.js"></script>
+		src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"></script>
 </head>
 
 <body>
@@ -74,7 +74,7 @@
 				title="Re-generate">&#x21bb;</button>
 
 			<button type="button" data-on:click="copy()" data-attr:disabled="$password == ''"
-					data-class:enabled="$password != ''" title="Copy">Copy</button>
+				data-class:enabled="$password != ''" title="Copy">Copy</button>
 
 			<p id="strength" data-show="$password != ''" style="display:none;">
 				Length: <output data-text="$wholelen"></output> chars,
@@ -83,7 +83,7 @@
 			</p>
 		</fieldset>
 	</form>
-	<script src="datastar-npg.js"></script>
+	<script src="script.js"></script>
 </body>
 
 </html>

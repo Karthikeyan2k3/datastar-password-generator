@@ -28,20 +28,20 @@ function initCharSet(numbers, uppercase, lowercase, ascii, space, customcheck, c
     }
 
     // Removes duplicate entries
-const seen = new Set();
-let charset = "";
-for (const ch of rawCharset) {
-    const cc = ch.codePointAt(0);
-    if (cc >= 0xD800 && cc < 0xE000) {
-        continue;
+    const seen = new Set();
+    let charset = "";
+    for (const ch of rawCharset) {
+        const cc = ch.codePointAt(0);
+        if (cc >= 0xD800 && cc < 0xE000) {
+            continue;
+        }
+        if (!seen.has(ch)) {
+            seen.add(ch);
+            charset += ch;
+        }
     }
-    if (!seen.has(ch)) {
-        seen.add(ch);
-        charset += ch;
-    }
-}
 
-return charset;
+    return charset;
 }
 
 function initCrypto() {
@@ -81,7 +81,7 @@ function calcEntropy(charset, wholelen) {
     if (entropy < 200) return entropy.toFixed(1);
     return entropy.toFixed(0);
 }
-    
+
 function generatePassword(charset, wholelen, _refresh) {
     if (wholelen < 0 || wholelen > 10000) {
         return "";
