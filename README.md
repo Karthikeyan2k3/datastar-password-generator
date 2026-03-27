@@ -2,6 +2,8 @@
 
 A reactive single page password generator built using **Datastar and JavaScript**.
 
+![datastar-password-generator demo](https://github.com/Karthikeyan2k3/datastar-password-generator/blob/main/.readme-assets/demo.gif)
+
 ## Why DataStar?
 
 Nowadays, wherever I go I see people using frameworks, even for a simple static application framework is used, people using frameworks named themself as "modern dev", they don't even aware that framework has dependencies, those dependencies has transitive dependencies, the chain grows, the people who claim themself as modern dev lacks in decision making, blindly trust the frameworks, but most of the problems can be solved without using frameworks. 
