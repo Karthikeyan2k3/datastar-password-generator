@@ -67,6 +67,32 @@ The goal is to generate password instantly when checkebox is checked. Thats what
 
 ```
 
+## Custom Datastar Bundle
+
+This project uses a custom datastar bundle([datastar-pwgen.js](https://github.com/Karthikeyan2k3/datastar-password-generator/blob/main/vendor/datastar-pwgen.js)) instead of full library, Only the required `data-attributes` for the datastar password generator were included.
+
+### Used Data Attributes
+
+- `data-signals`
+- `data-bind`
+- `data-effect`
+- `data-computed`
+- `data-attr`
+- `data-show`
+- `data-on`
+- `data-text`
+
+The bundle is built using the below mentioned command mentioned in [Lllama's blog](https://lllama.github.io/posts/datastartips/):
+
+```
+npx esbuild --bundle src/bundles/datastar.ts \
+            --outdir=../bundles/ \
+            --minify --sourcemap \
+            --target=es2023 \
+            --format=esm \
+            --define:ALIAS='""'
+```
+
 ## Credits
 
 This password generator is inspired by [Nayuki's random password generator](https://www.nayuki.io/res/random-password-generator-javascript/nayuki-password-generator.html) uses his JS logic for genearting passwords.
