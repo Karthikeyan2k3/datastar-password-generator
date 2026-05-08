@@ -5,8 +5,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
 	<title>Random password generator (Datastar + JS)</title>
-	<script type="module"
-		src="vendor/datastar-pwgen.js"></script>
+	<script type="module" src="vendor/datastar-pwgen.js"></script>
 </head>
 
 <body>
@@ -20,8 +19,7 @@
 			type: 'length',
 			len: 10,
 			entropy: 124,
-			refresh: 0,
-			copied: false
+			refresh: 0
 			}" data-computed:charset="initCharSet($numbers, $uppercase, $lowercase, $ascii, $space, $customcheck, $customchar)"
 		data-computed:wholelen="calcLength($type, $len, $entropy, $charset)"
 		data-computed:entropystr="calcEntropy($charset, $wholelen)"
@@ -71,14 +69,8 @@
 			<legend>Password</legend>
 			<output id="password" data-text="$password"></output><br />
 
-			<button type="button" data-on:click="$refresh++" data-attr:disabled="$password === ''"
-				title="Re-generate">&#x21bb;</button>
-
-			<button type="button"
-				data-on:click="navigator.clipboard.writeText(document.getElementById('password').textContent); $copied = true"
-				data-on:click__delay.2s="$copied = false" data-attr:disabled="$password == ''"
-				title="Copy">Copy</button>
-			<span class="alert" data-show="$copied" style="display:none;">Copied!</span>
+			<button type="button" data-on:click="$refresh++" data-attr:disabled="$password === ''" title="Re-generate">&#x21bb;</button>
+			<button type="button" data-copy="#password" data-attr:disabled="$password == ''" title="Copy">Copy</button>
 
 			<p id="strength" data-show="$password != ''" style="display:none;">
 				Length: <output data-text="$wholelen"></output> chars,
