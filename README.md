@@ -14,7 +14,7 @@ here comes **Datastar**, I choosed this library because it follows hypermedia ap
 
 ## what's different from nayuki's password generator?
 
-The goal is to generate password instantly when checkebox is checked. Thats what I've done here, by seeing below tabular colum you may understand real difference. Acheived the reactivity and state management without using framework, used DataStar, acheived the goal.
+The goal is to generate password instantly when checkbox is checked. Thats what I've done here, by seeing below tabular colum you may understand real difference. Achieved the reactivity and state management without using framework, used DataStar, acheived the goal.
 
 |                     |                 nayuki's password generator                |                           datastar-password-generator                              |
 | ------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
@@ -81,6 +81,7 @@ This project uses a custom datastar bundle([datastar-pwgen.js](https://github.co
 - `data-show`
 - `data-on`
 - `data-text`
+- `data-copy`
 
 The bundle is built using the below mentioned command mentioned in [Lllama's blog](https://lllama.github.io/posts/datastartips/):
 
@@ -93,6 +94,19 @@ npx esbuild --bundle src/bundles/datastar.ts \
             --define:ALIAS='""'
 ```
 
+### Custom `data-copy` Attribute
+
+This project includes a custom built `data-copy` attribute for copying the generated password to the clipboard. 
+
+When the copy button is clicked, the password is copied to the clipboard and then the button text changes to `✔ Copied`. After 2 seconds, the button text changes back to its original text
+
+Example:
+
+```html
+<p id="password">password</p>
+<button data-copy="#password">Copy</button>
+```
+
 ## Credits
 
-This password generator is inspired by [Nayuki's random password generator](https://www.nayuki.io/res/random-password-generator-javascript/nayuki-password-generator.html) uses his JS logic for genearting passwords.
+This password generator is inspired by [Nayuki's random password generator](https://www.nayuki.io/res/random-password-generator-javascript/nayuki-password-generator.html) uses his JS logic for generating passwords.
