@@ -8,8 +8,8 @@
 	<script type="module" src="vendor/datastar-pwgen.js"></script>
 </head>
 
-<body>
-	<form data-signals="{numbers: false, 
+<body data-signals="{ 
+			numbers: false, 
 			uppercase: false, 
 			lowercase: false, 
 			ascii: false, 
@@ -44,9 +44,6 @@
 				<input type="checkbox" data-bind:customcheck />
 				Custom: <input type="text" data-bind:customchar data-on:input="$customcheck=true" />
 			</label><br />
-			<span data-show="$type==='entropy' && $charset.length==1" style="display:none;">
-				Error: Need atleast 2 distinct characters in set
-			</span>
 		</fieldset>
 		<fieldset>
 			<legend>Password-strength</legend>
@@ -58,6 +55,9 @@
 				<input type="radio" name="type" value="entropy" data-bind:type /> Entropy:
 				<input type="number" data-on:input="$type='entropy'" data-bind:entropy /> bits
 			</label><br />
+			<span data-show="$type==='entropy' && $charset.length==1" style="display:none;">
+				Error: Need atleast 2 distinct characters in set
+			</span>
 			<span data-show="$wholelen > 10000 && !($type==='entropy' && $charset.length==1)" style="display:none;">
 				Error: Password length too large
 			</span>
@@ -65,8 +65,8 @@
 				Error: Negative password length
 			</span><br />
 		</fieldset>
-		<fieldset>
-			<legend>Password</legend>
+		<section>
+			<strong >Password:</strong>
 			<output id="password" data-text="$password"></output><br />
 
 			<button type="button" data-on:click="$refresh++" data-attr:disabled="$password === ''" title="Re-generate">&#x21bb;</button>
@@ -77,8 +77,7 @@
 				Charset size: <output data-text="$charset.length"></output> symbols,
 				Entropy: <output data-text="$entropystr"></output> bits
 			</p>
-		</fieldset>
-	</form>
+		</section>
 	<script src="script.js"></script>
 </body>
 

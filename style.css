@@ -9,6 +9,10 @@ body {
     max-width: 40em;
     margin-left: auto;
     margin-right: auto;
+    padding: 0.3em 0.5em;
+    border: 0.05em solid #ffffff;
+    border-radius: 0.5em;
+    width: 100%;
 }
 
 h1 {
@@ -16,41 +20,31 @@ h1 {
     font-size: 150%;
 }
 
-form {
-    padding: 0.3em 0.5em;
-    border: 0.05em solid #ffffff;
-    border-radius: 0.5em;
-    width: 100%;
-}
-
-form label:hover {
+label:hover {
     background-color: #dcdcdc;
     color: rgb(0, 0, 0);
 }
 
-form label {
+label {
     margin-left: 0.2em;
     padding: 0.1em 0.3em 0.1em 0.3em;
     border-radius: 0.2em;
+    user-select: none;
 }
 
-form input,
-form button {
+input, button {
     font-family: inherit;
     font-size: inherit;
-}
-
-form button {
     padding: 0.2em 0.6em;
 }
 
-form input[type=number] {
+input[type=number] {
     text-align: right;
-    padding: 0.2em 0em;
-    width: 4em
+    padding: 0.2em;
+    width: 4em;
 }
 
-fieldset {
+fieldset, section {
     margin-top: 20px;
     margin-bottom: 20px;
     max-width: unset;
@@ -58,14 +52,21 @@ fieldset {
     word-break: break-all;
 }
 
+strong {
+    display: block;
+    margin: 0.3rem;
+    margin-bottom: 0.4rem;
+}
+
 #password {
     display: inline-block;
-    margin: 0.3em;
-    padding: 0.1em 0.3em;
-    background-color: #F8F8F8;
-    border-radius: 0.2em;
-    font-size: 140%;
-    color: black;
+    margin: 0.3rem;
+    margin-bottom: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    background-color: #f8f8f8;
+    color: #000;
+    border-radius: 0.2rem;
+    font-size: 1.4rem;
     user-select: all;
 }
 
@@ -77,16 +78,4 @@ fieldset {
 span {
     color: red;
     font-size: large;
-}
-
-label {
-    user-select: none;
-}
-
-.alert {
-    background-color: #F8F8F8;
-    font-size: 15px;
-    color: black;
-    border-radius: 20px;
-    padding: 5px;
 }
