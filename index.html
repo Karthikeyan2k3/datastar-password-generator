@@ -9,73 +9,73 @@
 </head>
 
 <body data-signals="{ 
-			numbers: false, 
-			uppercase: false, 
-			lowercase: false, 
-			ascii: false, 
-			space: false, 
-			customcheck: false, 
-			customchar: '', 
-			type: 'length',
-			len: 10,
-			entropy: 124,
-			refresh: 0
-			}" data-computed:charset="initCharSet($numbers, $uppercase, $lowercase, $ascii, $space, $customcheck, $customchar)"
-		data-computed:wholelen="calcLength($type, $len, $entropy, $charset)"
-		data-computed:entropystr="calcEntropy($charset, $wholelen)"
-		data-effect="$password = ($charset && $wholelen > 0 && $wholelen <= 10000) ? generatePassword($charset, $wholelen, $refresh) : ''">
+			_numbers: false, 
+			_uppercase: false, 
+			_lowercase: false, 
+			_ascii: false, 
+			_space: false, 
+			_customcheck: false, 
+			_customchar: '', 
+			_type: 'length',
+			_len: 10,
+			_entropy: 124,
+			_refresh: 0
+			}" data-computed:_charset="initCharSet($_numbers, $_uppercase, $_lowercase, $_ascii, $_space, $_customcheck, $_customchar)"
+		data-computed:_wholelen="calcLength($_type, $_len, $_entropy, $_charset)"
+		data-computed:_entropystr="calcEntropy($_charset, $_wholelen)"
+		data-effect="$_password = ($_charset && $_wholelen > 0 && $_wholelen <= 10000) ? generatePassword($_charset, $_wholelen, $_refresh) : ''">
 		<h1>Random password generator (Datastar + JS)</h1>
-		<fieldset data-attr:disabled="$customcheck">
+		<fieldset data-attr:disabled="$_customcheck">
 			<legend>Character-set</legend>
-			<label><input type="checkbox" data-bind:numbers />
+			<label><input type="checkbox" data-bind:_numbers />
 				Numbers<i>(0123456789)</i></label><br />
-			<label><input type="checkbox" data-bind:uppercase />
+			<label><input type="checkbox" data-bind:_uppercase />
 				Uppercase<i>(ABCDEFGHIJKLMNOPQRSTUVWXYZ)</i></label><br />
-			<label><input type="checkbox" data-bind:lowercase />
+			<label><input type="checkbox" data-bind:_lowercase />
 				Lowercase<i>(abcdefghijklmnopqrstuvwxyz)</i></label><br />
-			<label><input type="checkbox" data-bind:ascii />
+			<label><input type="checkbox" data-bind:_ascii />
 				Ascii<i>(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</i></label><br />
-			<label><input type="checkbox" data-bind:space />
+			<label><input type="checkbox" data-bind:_space />
 				Space<i>()</i></label><br />
 		</fieldset>
-		<fieldset data-attr:disabled="$numbers || $uppercase || $lowercase || $ascii || $space">
+		<fieldset data-attr:disabled="$_numbers || $_uppercase || $_lowercase || $_ascii || $_space">
 			<legend>Create-character-set</legend>
 			<label>
-				<input type="checkbox" data-bind:customcheck />
-				Custom: <input type="text" data-bind:customchar data-on:input="$customcheck=true" />
+				<input type="checkbox" data-bind:_customcheck />
+				Custom: <input type="text" data-bind:_customchar data-on:input="$_customcheck=true" />
 			</label><br />
 		</fieldset>
 		<fieldset>
 			<legend>Password-strength</legend>
 			<label>
-				<input type="radio" name="type" value="length" data-bind:type /> Length:
-				<input type="number" data-on:input="$type='length'" data-bind:len /> characters
+				<input type="radio" name="type" value="length" data-bind:_type /> Length:
+				<input type="number" data-on:input="$_type='length'" data-bind:_len /> characters
 			</label><br />
 			<label>
-				<input type="radio" name="type" value="entropy" data-bind:type /> Entropy:
-				<input type="number" data-on:input="$type='entropy'" data-bind:entropy /> bits
+				<input type="radio" name="type" value="entropy" data-bind:_type /> Entropy:
+				<input type="number" data-on:input="$_type='entropy'" data-bind:_entropy /> bits
 			</label><br />
-			<span data-show="$type==='entropy' && $charset.length==1" style="display:none;">
+			<span data-show="$_type==='entropy' && $_charset.length==1" style="display:none;">
 				Error: Need atleast 2 distinct characters in set
 			</span>
-			<span data-show="$wholelen > 10000 && !($type==='entropy' && $charset.length==1)" style="display:none;">
+			<span data-show="$_wholelen > 10000 && !($_type==='entropy' && $_charset.length==1)" style="display:none;">
 				Error: Password length too large
 			</span>
-			<span data-show="$wholelen < 0" style="display:none;">
+			<span data-show="$_wholelen < 0" style="display:none;">
 				Error: Negative password length
 			</span><br />
 		</fieldset>
 		<section>
 			<strong >Password:</strong>
-			<output id="password" data-text="$password"></output><br />
+			<output id="password" data-text="$_password"></output><br />
 
-			<button type="button" data-on:click="$refresh++" data-attr:disabled="$password === ''" title="Re-generate">&#x21bb;</button>
-			<button type="button" data-copy="#password" data-attr:disabled="$password == ''" title="Copy">Copy</button>
+			<button type="button" data-on:click="$_refresh++" data-attr:disabled="$_password === ''" title="Re-generate">&#x21bb;</button>
+			<button type="button" data-copy="#password" data-attr:disabled="$_password == ''" title="Copy">Copy</button>
 
-			<p id="strength" data-show="$password != ''" style="display:none;">
-				Length: <output data-text="$wholelen"></output> chars,
-				Charset size: <output data-text="$charset.length"></output> symbols,
-				Entropy: <output data-text="$entropystr"></output> bits
+			<p id="strength" data-show="$_password != ''" style="display:none;">
+				Length: <output data-text="$_wholelen"></output> chars,
+				Charset size: <output data-text="$_charset.length"></output> symbols,
+				Entropy: <output data-text="$_entropystr"></output> bits
 			</p>
 		</section>
 	<script src="script.js"></script>
